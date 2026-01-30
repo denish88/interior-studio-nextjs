@@ -4,6 +4,7 @@ import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { CustomCursor } from "@/components/CustomCursor";
+import { GoldenBackground } from "@/components/GoldenBackground";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -35,6 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] antialiased">
+        <GoldenBackground />
         <CustomCursor />
         <Navbar />
         <main className="relative">{children}</main>

@@ -34,6 +34,17 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+/* Very subtle golden tint across the whole site (works with GoldenBackground component) */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(ellipse 100% 80% at 50% 0%, rgba(201,162,77,0.03) 0%, transparent 60%);
 }
 
 /* Selection */
