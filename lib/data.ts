@@ -3,6 +3,7 @@
 export const site = {
   name: "Orix Design Studio",
   tagline: "Crafting Timeless Interior Experiences",
+  heroTypingPhrase: "Build your dream into reality.",
   email: "hello@orixdesign.com",
   phone: "+1 (555) 123-4567",
   address: "123 Design District, Suite 400\nYour City, ST 10001",
@@ -143,6 +144,13 @@ export const aboutContent = {
     { value: "12+", label: "Years of Experience" },
     { value: "150+", label: "Projects Completed" },
     { value: "98%", label: "Client Satisfaction" },
+  ],
+  // Images for About section autoslider (replace with your own)
+  sliderImages: [
+    unsplash("1497366216548-37526070297c", 800),
+    unsplash("1600585154340-4a5f852ba3b8", 800),
+    unsplash("1600607687939-ee8dc71b2b9c", 800),
+    unsplash("1618221195710-dd6b41faaea6", 800),
   ],
 };
 

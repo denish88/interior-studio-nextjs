@@ -4,13 +4,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { site } from "@/lib/data";
+import { TypingAnimation } from "@/components/TypingAnimation";
 
 const heroImage =
   "https://images.unsplash.com/photo-1600607687939-ee8dc71b2b9c?w=1920&q=85";
 
 export function Hero() {
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden">
+    <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden">
       <div className="absolute inset-0">
         <motion.div
           className="absolute inset-0"
@@ -33,7 +34,7 @@ export function Hero() {
         />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-6 text-center lg:text-left lg:px-8">
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-6 text-center lg:px-8 lg:text-left">
         <motion.div
           className="max-w-3xl"
           initial={{ opacity: 0, y: 30 }}
@@ -60,16 +61,27 @@ export function Hero() {
               Start a Project
             </Link>
           </div>
+          {site.heroTypingPhrase && (
+            <div className="mt-10 min-h-[2.5rem] sm:mt-12 sm:min-h-[2.75rem] md:min-h-[2rem]">
+              <TypingAnimation
+                text={site.heroTypingPhrase}
+                speedMs={70}
+                startDelayMs={1400}
+                loop
+                loopDelayMs={2800}
+              />
+            </div>
+          )}
         </motion.div>
       </div>
 
       <motion.div
-        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
+        className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 sm:bottom-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.6 }}
       >
-        <span className="block h-12 w-px bg-[var(--foreground-muted)]" />
+        <span className="block h-10 w-px bg-[var(--foreground-muted)] sm:h-12" />
       </motion.div>
     </section>
   );

@@ -1,12 +1,15 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { aboutContent } from "@/lib/data";
+import { CountUp } from "@/components/CountUp";
+import { AboutImageSlider } from "@/components/AboutImageSlider";
 
-const aboutImage =
-  "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80";
+const aboutImages =
+  aboutContent.sliderImages?.length
+    ? aboutContent.sliderImages
+    : ["https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"];
 
 export function AboutSection() {
   return (
@@ -28,11 +31,11 @@ export function AboutSection() {
             <p className="mt-6 text-[var(--foreground-muted)] leading-relaxed">
               {aboutContent.paragraph}
             </p>
-            <div className="mt-10 flex gap-12">
+            <div className="mt-10 flex flex-wrap gap-10 sm:gap-12">
               {aboutContent.stats.map((stat) => (
                 <div key={stat.label}>
-                  <p className="font-serif text-3xl font-medium text-[var(--accent)]">
-                    {stat.value}
+                  <p className="font-serif text-3xl font-medium text-[var(--accent)] sm:text-4xl">
+                    <CountUp value={stat.value} />
                   </p>
                   <p className="mt-1 text-sm text-[var(--foreground-muted)]">
                     {stat.label}
@@ -50,18 +53,16 @@ export function AboutSection() {
           </motion.div>
 
           <motion.div
-            className="relative aspect-[4/5] overflow-hidden grayscale"
+            className="relative w-full"
             initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            <Image
-              src={aboutImage}
-              alt="Studio or founder"
-              fill
-              className="object-cover"
-              sizes="(max-width: 1024px) 100vw, 50vw"
+            <AboutImageSlider
+              images={aboutImages}
+              alt="Studio"
+              intervalMs={4500}
             />
           </motion.div>
         </div>
