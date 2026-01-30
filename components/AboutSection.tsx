@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { aboutContent } from "@/lib/data";
 import { CountUp } from "@/components/CountUp";
 import { AboutImageSlider } from "@/components/AboutImageSlider";
@@ -12,6 +13,13 @@ const aboutImages =
     : ["https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"];
 
 export function AboutSection() {
+  const statsRef = useRef<HTMLDivElement>(null);
+  const statsInView = useInView(statsRef, {
+    once: true,
+    margin: "0px",
+    amount: 0.2,
+  });
+
   return (
     <section className="border-t border-[var(--border)] bg-[var(--background)] py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -31,11 +39,14 @@ export function AboutSection() {
             <p className="mt-6 text-[var(--foreground-muted)] leading-relaxed">
               {aboutContent.paragraph}
             </p>
-            <div className="mt-10 flex flex-wrap gap-10 sm:gap-12">
+            <div
+              ref={statsRef}
+              className="mt-10 flex flex-wrap gap-10 sm:gap-12"
+            >
               {aboutContent.stats.map((stat) => (
                 <div key={stat.label}>
                   <p className="font-serif text-3xl font-medium text-[var(--accent)] sm:text-4xl">
-                    <CountUp value={stat.value} />
+                    <CountUp value={stat.value} trigger={statsInView} />
                   </p>
                   <p className="mt-1 text-sm text-[var(--foreground-muted)]">
                     {stat.label}
