@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { allProjects } from "@/lib/data";
 import { ProjectGallerySlider } from "@/components/ProjectGallerySlider";
+import { ProjectGalleryHoverGrid } from "@/components/ProjectGalleryHoverGrid";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -94,6 +94,24 @@ export default async function ProjectPage({ params }: Props) {
                   <span className="text-[var(--foreground-muted)]">Year:</span>{" "}
                   <span className="text-[var(--foreground)]">{project.year}</span>
                 </p>
+                {"address" in project && project.address && (
+                  <div className="flex items-start gap-3 pt-1">
+                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center text-[var(--accent)]" aria-hidden>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                    </span>
+                    <div>
+                      <p className="text-xs font-medium uppercase tracking-widest text-[var(--foreground-muted)]">
+                        Location
+                      </p>
+                      <p className="mt-1 text-sm text-[var(--foreground)] leading-snug">
+                        {project.address}
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
             <div className="lg:col-span-2 space-y-8">
@@ -115,19 +133,10 @@ export default async function ProjectPage({ params }: Props) {
 
       <section className="border-t border-[var(--border)]">
         <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-24">
-          <div className="grid gap-6 sm:grid-cols-2">
-            {gallery.slice(1, 4).map((src, i) => (
-              <div key={i} className="relative aspect-[4/3] overflow-hidden">
-                <Image
-                  src={src}
-                  alt={`${project.title} gallery ${i + 2}`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 640px) 100vw, 50vw"
-                />
-              </div>
-            ))}
-          </div>
+          <p className="mb-6 text-xs font-medium uppercase tracking-widest text-[var(--foreground-muted)]">
+            Hover to preview
+          </p>
+          <ProjectGalleryHoverGrid images={gallery} title={project.title} />
         </div>
       </section>
 
