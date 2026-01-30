@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { allProjects } from "@/lib/data";
+import { ProjectGallerySlider } from "@/components/ProjectGallerySlider";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -20,18 +21,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+// Dummy gallery images per project (replace with real project images)
+function getGalleryImages(projectImage: string) {
+  return [
+    projectImage,
+    "https://images.unsplash.com/photo-1600585154340-4a5f852ba3b8?w=1200&q=80",
+    "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80",
+    "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&q=80",
+    "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200&q=80",
+    "https://images.unsplash.com/photo-1600607687939-ee8dc71b2b9c?w=1200&q=80",
+  ];
+}
+
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
   const project = allProjects.find((p) => p.slug === slug);
   if (!project) notFound();
 
-  // Dummy gallery images (replace with real project images)
-  const gallery = [
-    project.image,
-    "https://images.unsplash.com/photo-1600585154340-4a5f852ba3b8?w=1200&q=80",
-    "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80",
-    "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1200&q=80",
-  ];
+  const gallery = getGalleryImages(project.image);
 
   return (
     <div className="pt-24">
@@ -58,18 +65,7 @@ export default async function ProjectPage({ params }: Props) {
       </section>
 
       <section className="border-t border-[var(--border)]">
-        <div className="mx-auto max-w-7xl px-6 py-12 lg:px-8 lg:py-16">
-          <div className="relative aspect-[21/9] overflow-hidden">
-            <Image
-              src={project.image}
-              alt={project.title}
-              fill
-              className="object-cover"
-              sizes="100vw"
-              priority
-            />
-          </div>
-        </div>
+        <ProjectGallerySlider images={gallery} title={project.title} />
       </section>
 
       <section className="border-t border-[var(--border)] bg-[var(--background-soft)]">
