@@ -1,0 +1,71 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { aboutContent } from "@/lib/data";
+
+const aboutImage =
+  "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80";
+
+export function AboutSection() {
+  return (
+    <section className="border-t border-[var(--border)] bg-[var(--background)] py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="grid gap-16 lg:grid-cols-2 lg:items-center lg:gap-24">
+          <motion.div
+            initial={{ opacity: 0, x: -24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <p className="text-xs font-medium uppercase tracking-widest text-[var(--accent)]">
+              About Orix
+            </p>
+            <h2 className="mt-4 font-serif text-3xl font-medium text-[var(--foreground)] sm:text-4xl lg:text-5xl">
+              {aboutContent.headline}
+            </h2>
+            <p className="mt-6 text-[var(--foreground-muted)] leading-relaxed">
+              {aboutContent.paragraph}
+            </p>
+            <div className="mt-10 flex gap-12">
+              {aboutContent.stats.map((stat) => (
+                <div key={stat.label}>
+                  <p className="font-serif text-3xl font-medium text-[var(--accent)]">
+                    {stat.value}
+                  </p>
+                  <p className="mt-1 text-sm text-[var(--foreground-muted)]">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <Link
+              href="/about"
+              className="mt-10 inline-flex items-center gap-2 text-sm font-medium text-[var(--accent)] transition-colors hover:opacity-80"
+            >
+              Learn more about us
+              <span aria-hidden>→</span>
+            </Link>
+          </motion.div>
+
+          <motion.div
+            className="relative aspect-[4/5] overflow-hidden grayscale"
+            initial={{ opacity: 0, x: 24 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <Image
+              src={aboutImage}
+              alt="Studio or founder"
+              fill
+              className="object-cover"
+              sizes="(max-width: 1024px) 100vw, 50vw"
+            />
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
