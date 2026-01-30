@@ -7,7 +7,8 @@ import { site } from "@/lib/data";
 import { TypingAnimation } from "@/components/TypingAnimation";
 
 const heroImage =
-  "https://images.unsplash.com/photo-1600607687939-ee8dc71b2b9c?w=1920&q=85";
+  "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=85";
+  
 
 export function Hero() {
   return (
@@ -74,15 +75,6 @@ export function Hero() {
           )}
         </motion.div>
       </div>
-
-      <motion.div
-        className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 sm:bottom-8"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.6 }}
-      >
-        <span className="block h-10 w-px bg-[var(--foreground-muted)] sm:h-12" />
-      </motion.div>
     </section>
   );
 }

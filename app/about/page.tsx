@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { aboutContent, processSteps, site } from "@/lib/data";
+import { CountUp } from "@/components/CountUp";
 
 export const metadata: Metadata = {
   title: "About | Orix Design Studio",
@@ -27,11 +28,11 @@ export default function AboutPage() {
           <p className="max-w-xl text-lg leading-relaxed text-[var(--foreground-muted)]">
             {aboutContent.paragraph}
           </p>
-          <div className="flex gap-12">
+          <div className="flex flex-wrap gap-10 sm:gap-12">
             {aboutContent.stats.map((stat) => (
               <div key={stat.label}>
-                <p className="font-serif text-4xl font-medium text-[var(--accent)]">
-                  {stat.value}
+                <p className="font-serif text-4xl font-medium text-[var(--accent)] sm:text-5xl">
+                  <CountUp value={stat.value} />
                 </p>
                 <p className="mt-2 text-sm text-[var(--foreground-muted)]">
                   {stat.label}
