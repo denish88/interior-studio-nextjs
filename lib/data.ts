@@ -4,6 +4,8 @@ export const site = {
   name: "Orix Design Studio",
   tagline: "Crafting Timeless Interior Experiences",
   heroTypingPhrase: "Build your dream into reality.",
+  /** Replace with your production URL for SEO (canonical, OG, sitemap). */
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://orixstudio.vercel.app/",
   email: "hello@orixdesign.com",
   phone: "+1 (555) 123-4567",
   address: "123 Design District, Suite 400\nYour City, ST 10001",
